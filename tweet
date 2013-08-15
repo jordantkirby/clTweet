@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+
+import twitter
+import sys
+import ConfigParser
+from pyColor import color
+
+# Read user info from file
+config = ConfigParser.RawConfigParser()
+config.read('user.cfg')
+consumer_key = config.get('user-info', 'consumer_key')
+consumer_secret = config.get('user-info', 'consumer_secret')
+access_token = config.get('user-info', 'access_token')
+access_token_secret = config.get('user-info', 'access_token_secret')
+
+### Create the twitter api object
+api = twitter.Api(consumer_key=consumer_key,
+consumer_secret=consumer_secret, access_token_key=access_token, access_token_secret=access_token_secret)
+
+def prompt():
+	print '\nNew Tweet:\n'
+	content =  raw_input('')
+	try:
+		send = api.PostUpdate(content)
+		print color.GREEN + '\nTweet Sent!\n' + color.ENDC
+	except:
+		print color.RED + '\nTweet Unsuccessful, Try Again\n' + color.ENDC
+
+def tweet(content):
+	try:
+		send = api.PostUpdate(content)
+		print color.GREEN + '\nTweet Sent!\n' + color.ENDC
+	except:
+		print color.RED + '\nTweet Unsuccessful, Try Again\n' + color.ENDC
+
+### Run the app 
+if __name__=="__main__":
+	import sys
+	if len(sys.argv) > 1:
+		content = ' '.join(sys.argv[1:])
+		tweet(content)
+	else:
+		prompt()
