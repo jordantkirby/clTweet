@@ -4,6 +4,20 @@ commandTweet
 Tweet right from the command line. 
 To use this program simply type tweet and wait for the prompt.
 
+Setup:
+Clone the repo
+<code>
+	$ git clone <url>
+</code>
+Move into the project directory
+<code>
+	$ cd clTweet/
+</code>
+Install the soft link so it can be called anywhere
+<code>
+	$ ./install
+</code>
+	
 Usage:
 <code>
 	$ tweet <Your tweet content here>*
